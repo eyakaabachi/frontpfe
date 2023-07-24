@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>predict</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <title>Patients</title>
+
+
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+        <h1 class="h3 mb-2 text-gray-800">Patients Table</h1>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTable</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                           <thead>
+                                                <tr>
+                                                  <th data-class-name="priority">Patient ID</th>
+                                                    <th>Gender</th>
+                                                    <th>Age</th>
+                                                    <th>BMI</th>
+                                                    <th>Height</th>
+                                                    <th>Weight</th>
+                                                </tr>
+                                              </thead>
+                                            <tbody>
+                                                {% for row in data %}
+                                                    <tr>
+                                                        <td>{{ row.Patient_ID }}</td>
+                                                        <td>{{ row.SEX }}</td>
+                                                        <td>{{ row.Age }}</td>
+                                                        <td>{{ row.BMI }}</td>
+                                                        <td>{{ row.HEIGHT3 }}</td>
+                                                        <td>{{ row.WEIGHT2 }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables JavaScript -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        // Initialize DataTable
+        $(document).ready(function() {
+            $('#dataTable').DataTable({
+                paging: true,  // Enable paging
+                ordering: true,  // Enable ordering
+                searching: true  // Enable searching
+            });
+        });
+    </script>
+{% endblock %}
+</body>
+</html>

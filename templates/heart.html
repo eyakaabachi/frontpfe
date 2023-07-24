@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heart Disease - Prediction</title>
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+<div class="dashboard" id="content">
+
+        <h1 class="h3 mb-2 text-gray-800">Heart Disease Segmentation</h1>
+    <div class="card shadow mb-4">
+     <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Heart Disease</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">See More:</div>
+                                            <a class="dropdown-item" href="#" id="show-form-button">Prediction</a>
+                                            <a class="dropdown-item" href="#" id="show-dash-app-button">Segmentation</a>
+                                        </div>
+                                    </div>
+                                </div>
+     <div class="card-body">
+                                            <!-- Add this div to hold the Dash app -->
+                        <div id="dash-container" style="display: none;">
+                            <iframe src="http://127.0.0.1:1111/heart" width="100%" height="600" frameborder="0"></iframe>
+                        </div>
+<div id="form-container">
+<form action="result_heart" class="form">
+    <p class="message">Please enter the following information:</p>
+    <div class="form-group row">
+        <div class="col-sm-4 mb-3">
+            <span>Gender:</span>
+            <input class="form-control" name="n1" placeholder="" required="" type="number">
+        </div>
+
+        <div class="col-sm-4 mb-3">
+            <span>Exercise Anytime:</span>
+            <input class="form-control" name="n2" placeholder="" required="" type="number">
+        </div>
+
+        <div class="col-sm-4 mb-3">
+            <span>Binge Drinking:</span>
+            <input class="form-control" name="n3" placeholder="" required="" type="number">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-4 mb-3">
+            <span>Fruit Intake:</span>
+            <input class="form-control" name="n4" placeholder="" required="" type="number">
+        </div>
+
+        <div class="col-sm-4 mb-3">
+            <span>Vegetable Intake:</span>
+            <input class="form-control" name="n5" placeholder="" required="" type="number">
+        </div>
+        <div class="col-sm-4 mb-3">
+            <span>High Blood Pressure:</span>
+            <input class="form-control" name="n6" placeholder="" required="" type="number">
+        </div>
+
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-4 mb-3">
+            <span>Blood Pressure Medication:</span>
+            <input class="form-control" name="n7" placeholder="" required="" type="number">
+        </div>
+        <div class="col-sm-4 mb-3">
+            <span>Blood Cholesterol Checked:</span>
+            <input class="form-control" name="n8" placeholder="" required="" type="number">
+        </div>
+        <div class="col-sm-4 mb-3">
+            <span>Depression (Mental Health):</span>
+            <input class="form-control" name="n9" placeholder="" required="" type="number">
+        </div>
+
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-4 mb-3">
+            <span>Doctor Told High Blood Pressure:</span>
+            <input class="form-control" name="n10" placeholder="" required="" type="number">
+        </div>
+
+        <div class="col-sm-4 mb-3">
+            <span>Heart Attack:</span>
+            <input class="form-control" name="n11" placeholder="" required="" type="number">
+        </div>
+        <div class="col-sm-4 mb-3">
+            <span>Stroke:</span>
+            <input class="form-control" name="n12" placeholder="" required="" type="number">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-4 mb-3">
+            <span>Coronary Heart Disease (MI/CHD):</span>
+            <input class="form-control" name="n13" placeholder="" required="" type="number">
+        </div>
+
+        <div class="col-sm-4 mb-3">
+            <span>Diagnosed with Cancer:</span>
+            <input class="form-control" name="n14" placeholder="" required="" type="number">
+        </div>
+        <div class="col-sm-4 mb-3">
+            <span>Diabetes:</span>
+            <input class="form-control" name="n15" placeholder="" required="" type="number">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-4 mb-3">
+            <span>Smoked at least 100 Cigarettes:</span>
+            <input class="form-control" name="n16" placeholder="" required="" type="number">
+        </div>
+
+        <div class="col-sm-4 mb-3">
+            <span>Cigarettes Smoked per Day:</span>
+            <input class="form-control" name="n17" placeholder="" required="" type="number">
+        </div>
+
+        <div class="col-sm-4 mb-3">
+            <span>Currently Use Smokeless Tobacco:</span>
+            <input class="form-control" name="n18" placeholder="" required="" type="number">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-4 mb-3">
+            <span>Smoking Status:</span>
+            <input class="form-control" name="n19" placeholder="" required="" type="number">
+        </div>
+
+        <div class="col-sm-4 mb-3">
+            <span>Adult Smoker:</span>
+            <input class="form-control" name="n20" placeholder="" required="" type="number">
+        </div>
+    </div>
+    <div class="submit-container">
+        <button class="btn btn-primary btn-user btn-inline-block" type="submit">Predict</button>
+    </div>
+        <div class="flex">
+                            {% if result4 %}
+        <p class="mb-0">{{ result4 }}</p>
+                {% endif %}
+            {% if recommended_doctors4 %}
+        <ul>
+            {% for doctor in recommended_doctors4 %}
+                <li>{{doctor.FullName}}: {{ doctor.Specialty }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+        </div>
+    </form></div>
+                                </div>
+    </div>
+
+</div>
+  </div>
+<script>
+    // Show/hide the form and the Dash app when the buttons are clicked
+    document.getElementById("show-form-button").addEventListener("click", function () {
+        var formContainer = document.getElementById("form-container");
+        formContainer.style.display = "block";
+
+        var dashContainer = document.getElementById("dash-container");
+        dashContainer.style.display = "none";
+    });
+
+    document.getElementById("show-dash-app-button").addEventListener("click", function () {
+        var formContainer = document.getElementById("form-container");
+        formContainer.style.display = "none";
+
+        var dashContainer = document.getElementById("dash-container");
+        dashContainer.style.display = "block";
+    });
+
+    // Show the form by default
+    var formContainer = document.getElementById("form-container");
+    formContainer.style.display = "block";
+</script>
+{% endblock %}
+</body>
+</html>
